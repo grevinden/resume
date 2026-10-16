@@ -1,0 +1,118 @@
+/* ---------- Проекты: 3-колонная сетка, hover «поднимает» карточку ---------- */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.proj {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  overflow: hidden;
+  transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+/* акцентная нить сверху — проявляется при наведении */
+
+.proj::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent 72%);
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
+}
+
+.proj:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 180, 84, 0.35);
+  box-shadow: var(--shadow);
+}
+
+.proj:hover::before {
+  opacity: 1;
+}
+
+.proj-top {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.proj-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-faint);
+  transition: color 0.2s var(--ease);
+}
+
+.proj:hover .proj-num {
+  color: var(--accent);
+}
+
+.proj-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.proj-org {
+  margin: 8px 0 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-faint);
+}
+
+.proj-list {
+  margin: 16px 0 18px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--text-dim);
+}
+
+.proj-list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.proj-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.proj-tags {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}

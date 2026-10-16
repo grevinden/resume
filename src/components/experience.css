@@ -1,0 +1,135 @@
+/* ---------- Опыт: вертикальный рельс с «точками», живая подписка у текущей ---------- */
+
+.xp {
+  position: relative;
+  max-width: 840px;
+  display: grid;
+  gap: 18px;
+  padding-left: 34px;
+}
+
+.xp::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--line-strong), var(--line));
+}
+
+.xp-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 26px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform 0.18s var(--ease), border-color 0.18s var(--ease);
+}
+
+.xp-item:hover {
+  transform: translateX(6px);
+  border-color: rgba(255, 180, 84, 0.35);
+}
+
+/* точка на рельсе */
+
+.xp-anchor {
+  position: absolute;
+  left: -35px;
+  top: 28px;
+}
+
+.xp-dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--line-strong);
+  transition: border-color 0.18s var(--ease);
+}
+
+.xp-item:hover .xp-dot {
+  border-color: var(--accent);
+}
+
+.xp-dot-live {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 18px rgba(255, 180, 84, 0.5);
+}
+
+.xp-dot-live::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  animation: pulse 2.4s var(--ease) infinite;
+}
+
+.xp-period {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  padding-top: 3px;
+}
+
+.xp-body {
+  min-width: 0;
+}
+
+.xp-org {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.xp-role {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.xp-now {
+  color: var(--ok);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.xp-text {
+  margin: 10px 0 0;
+  font-size: 14.5px;
+  color: var(--text-dim);
+}
+
+@media (max-width: 680px) {
+  .xp {
+    padding-left: 26px;
+  }
+
+  .xp-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding-left: 22px;
+  }
+
+  .xp-anchor {
+    left: -27px;
+    top: 24px;
+  }
+
+  .xp-period {
+    padding-top: 0;
+  }
+}
