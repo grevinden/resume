@@ -282,7 +282,7 @@
   letter-spacing: 0.05em;
 }
 
-/* --- Терминал: profile.json --- */
+/* --- Терминал: profile.yaml --- */
 
 .term {
   background: var(--bg-soft);
@@ -370,6 +370,10 @@
 
 .t-key {
   color: var(--accent-2);
+}
+
+.t-colon {
+  color: var(--text-faint);
 }
 
 .t-val {

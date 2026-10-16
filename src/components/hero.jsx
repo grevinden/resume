@@ -35,19 +35,17 @@ function RoleTicker() {
   return <span class={`role ${fading ? 'is-fading' : ''}`}>{profile.roles[idx]}</span>
 }
 
-/* «profile.json» в терминале: факты кандидата в виде кода */
+/* «profile.yaml» в терминале: факты кандидата в виде кода */
 const LINES = [
   { plain: '# profile v1.0 · 26 лет опыта', cmt: true },
-  { plain: '{' },
-  { indent: 1, num: '1', k: 'name', v: '"Антон Растяженко"' },
-  { indent: 1, num: '2', k: 'focus', v: '["Python", "Go", "1С", "Linux/DevOps"]' },
-  { indent: 1, num: '3', k: 'languages', v: '["python", "fastapi", "go", "c++", "rust"]' },
-  { indent: 1, num: '4', k: 'databases', v: '["postgresql", "ms_sql"]' },
-  { indent: 1, num: '5', k: 'scale', v: '{"db": "5+ TB", "tsc": "150+"}' },
-  { indent: 1, num: '6', k: 'location', v: '"Домодедово, Москва область"' },
-  { indent: 1, num: '7', k: 'english', v: '"C1"' },
-  { indent: 1, num: '8', k: 'status', v: '"OPEN_TO_OFFERS"' },
-  { plain: '}' },
+  { num: '1', k: 'name', v: 'Антон Растяженко' },
+  { num: '2', k: 'focus', v: '[Python, Go, 1С, Linux/DevOps]' },
+  { num: '3', k: 'languages', v: '[python, fastapi, go, c++, rust]' },
+  { num: '4', k: 'databases', v: '[postgresql, ms_sql]' },
+  { num: '5', k: 'scale', v: '{db: 5+ TB, tsc: 150+}' },
+  { num: '6', k: 'location', v: 'Домодедово, Москва область' },
+  { num: '7', k: 'english', v: 'C1' },
+  { num: '8', k: 'status', v: 'OPEN_TO_OFFERS' },
 ]
 
 function Term() {
@@ -59,18 +57,18 @@ function Term() {
           <i />
           <i />
         </span>
-        <span class="term-title">anton@localhost · ~/profile.json</span>
+        <span class="term-title">anton@localhost · ~/profile.yaml</span>
       </div>
-      <div class="term-body" aria-label="Факты о кандидате в виде JSON-файла profile.json">
+      <div class="term-body" aria-label="Факты о кандидате в виде YAML-файла profile.yaml">
         {LINES.map((l, i) =>
-          l.indent ? (
+          l.k ? (
             <div class="t-line t-indent" key={l.num}>
               <span class="t-num" aria-hidden="true">
                 {l.num}
               </span>
-              <span class="t-key">"{l.k}"</span>
+              <span class="t-key">{l.k}</span>
+              <span class="t-colon">: </span>
               <span class="t-val">{l.v}</span>
-              {i < LINES.length - 2 ? ',' : ''}
             </div>
           ) : (
             <div class={`t-line ${l.cmt ? 't-cmt' : ''}`} key={i}>
