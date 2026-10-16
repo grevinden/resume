@@ -9,7 +9,7 @@ export default function Experience() {
         <SectionHead
           num="04"
           title="Опыт работы"
-          lead="Полный путь: от программиста 1С в 1c.ru до интеграционных платформ и серверной комнаты розничной сети. Даты — открытые."
+          lead="Полный путь: от программиста 1С у партнёров 1С:Франчайзинг до интеграционных платформ и серверной комнаты розничной сети. Даты — открытые."
         />
         <div class="xp">
           {experience.map((e) => (
@@ -20,7 +20,7 @@ export default function Experience() {
                 </span>
                 <time class="xp-period">{e.period}</time>
                 <div class="xp-body">
-                  <h3 class="xp-org">{e.org}</h3>
+                  {e.org ? <h3 class="xp-org">{e.org}</h3> : null}
                   <p class="xp-role">
                     {e.role}
                     {e.current ? <span class="xp-now"> · сейчас</span> : null}

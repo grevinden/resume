@@ -7,6 +7,7 @@ const links = [
   { id: 'skills', label: 'Навыки' },
   { id: 'projects', label: 'Проекты' },
   { id: 'experience', label: 'Опыт' },
+  { id: 'education', label: 'Образование' },
   { id: 'contacts', label: 'Контакты' },
 ]
 

@@ -45,7 +45,7 @@ const LINES = [
   { num: '5', k: 'scale', v: '{db: 5+ TB, tsc: 150+}' },
   { num: '6', k: 'location', v: 'Домодедово, Москва область' },
   { num: '7', k: 'english', v: 'C1' },
-  { num: '8', k: 'status', v: 'OPEN_TO_OFFERS' },
+  { num: '8', k: 'status', v: 'ACTIVE_JOB_SEARCH' },
 ]
 
 function Term() {

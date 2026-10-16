@@ -76,7 +76,7 @@ export default function Contacts() {
   return (
     <section class="section" id="contacts">
       <div class="container">
-        <SectionHead num="05" title="Контакты" lead={contacts.lead} />
+        <SectionHead num="06" title="Контакты" lead={contacts.lead} />
         <div class="contact-grid">
           <div class="contact-main">
             <Reveal>

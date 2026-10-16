@@ -1,0 +1,56 @@
+/* --- Образование: одна карточка на учёбу, стиль секций --- */
+
+.edu {
+  max-width: 760px;
+}
+
+.edu-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 28px;
+  padding: 24px 28px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.edu-item:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.edu-period {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: var(--text-faint);
+}
+
+.edu-org {
+  margin: 0 0 8px;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.edu-field {
+  margin: 0 0 12px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+.edu-note {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--accent-2);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 640px) {
+  .edu-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px;
+  }
+}
