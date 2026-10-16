@@ -43,7 +43,7 @@ const LINES = [
   { num: '3', k: 'languages', v: '[python, fastapi, go, c++, rust]' },
   { num: '4', k: 'databases', v: '[postgresql, ms_sql]' },
   { num: '5', k: 'scale', v: '{db: 5+ TB, tsc: 150+}' },
-  { num: '6', k: 'location', v: 'Домодедово, Москва область' },
+  { num: '6', k: 'location', v: 'Домодедово, Московская область' },
   { num: '7', k: 'english', v: 'C1' },
   { num: '8', k: 'status', v: 'ACTIVE_JOB_SEARCH' },
 ]

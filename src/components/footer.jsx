@@ -11,7 +11,7 @@ export default function Footer() {
         <p class="footer-copy">
           © {year} {profile.name} · Домодедово, Россия
         </p>
-        <p class="footer-tech">preact 11 + vite 8 · статика, без бэкенда</p>
+        <p class="footer-tech">preact 11 + vite 8 · статика, без backend</p>
         <button class="footer-up" type="button" onClick={toTop} aria-label="Наверх страницы" title="Наверх">
           ↑
         </button>
