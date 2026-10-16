@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'preact/hooks'
 import { Reveal, reducedMotion } from './ui.jsx'
 import { profile } from '../data/resume.js'
+import photo from '../assets/photo.jpg'
 import './hero.css'
 
 /* Ротация ролей: всякий 4-я секунда — следующая, с лёгким fade */
@@ -129,9 +130,39 @@ export default function Hero() {
             <li>{profile.english}</li>
           </ul>
         </Reveal>
-        <Reveal delay={180} className="hero-term">
-          <Term />
-        </Reveal>
+        <div class="hero-side">
+          <Reveal delay={120} className="hero-photo">
+            <figure class="photo-card">
+              <div class="term-bar">
+                <span class="term-dots" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                <span class="term-title">anton · portrait.png</span>
+                <span class="photo-live" aria-hidden="true" />
+              </div>
+              <div class="photo-frame">
+                <img
+                  class="photo-img"
+                  src={photo}
+                  alt={`${profile.name} — портрет`}
+                  width="1210"
+                  height="1762"
+                  decoding="async"
+                />
+                <span class="photo-scrim" aria-hidden="true" />
+                <figcaption class="photo-caption">
+                  <b>{profile.name}</b>
+                  <span>backend · 1с · linux</span>
+                </figcaption>
+              </div>
+            </figure>
+          </Reveal>
+          <Reveal delay={260} className="hero-term">
+            <Term />
+          </Reveal>
+        </div>
       </div>
     </section>
   )
