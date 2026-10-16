@@ -4,7 +4,7 @@ import { profile } from '../data/resume.js'
 import photo from '../assets/photo.jpg'
 import './hero.css'
 
-/* Ротация ролей: всякий 4-я секунда — следующая, с лёгким fade */
+/* Ротация ролей: каждые 4 секунды — следующая, с лёгким fade */
 function RoleTicker() {
   const [idx, setIdx] = useState(0)
   const [fading, setFading] = useState(false)
@@ -152,7 +152,7 @@ export default function Hero() {
                 <span class="photo-scrim" aria-hidden="true" />
                 <figcaption class="photo-caption">
                   <b>{profile.name}</b>
-                  <span>backend · 1с · linux</span>
+                  <span>backend · 1С · linux</span>
                 </figcaption>
               </div>
             </figure>

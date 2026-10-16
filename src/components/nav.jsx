@@ -54,7 +54,7 @@ export default function Nav() {
             АР
           </span>
           <span class="brand-name">{profile.name}</span>
-          <span class="brand-sub">backend · 1с · linux</span>
+          <span class="brand-sub">backend · 1С · linux</span>
         </a>
         <nav class="nav-links" aria-label="Основная навигация">
           {links.map((l) => (
