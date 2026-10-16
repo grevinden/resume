@@ -222,7 +222,8 @@
 
 .photo-frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  /* 5:6 вместо 4:5: кадр чуть ниже, чтобы сдвиг «+15% вниз» был чистым */
+  aspect-ratio: 5 / 6;
   overflow: hidden;
   background: var(--bg-soft);
   border-top: 1px solid var(--line);
@@ -236,7 +237,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 26%;
+  /* сцена: 17.6% высоты кропится; 85% → верхний 15% скрыт, низ +15% виден */
+  object-position: 50% 85%;
   animation: breathe 16s ease-in-out infinite alternate;
 }
 
