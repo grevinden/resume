@@ -1,0 +1,97 @@
+/* Заставка загрузки: непрозрачный слой поверх сайта (nav — z-index 50).
+   Пока открыта, страница не скроллится: html.is-booting. */
+
+html.is-booting {
+  overflow: hidden;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 18px;
+  background: var(--bg);
+  transition: opacity 0.4s var(--ease), visibility 0s linear 0.4s;
+}
+
+.preloader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-mark {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  animation: pl-pulse 1.6s var(--ease) infinite;
+}
+
+.preloader-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+
+.preloader-bar {
+  width: 168px;
+  height: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.preloader-bar i {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--accent-2);
+  animation: pl-slide 1.2s var(--ease) infinite;
+}
+
+@keyframes pl-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.94);
+    opacity: 0.72;
+  }
+}
+
+@keyframes pl-slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(350%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader,
+  .preloader-mark,
+  .preloader-bar i {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media print {
+  .preloader {
+    display: none;
+  }
+}

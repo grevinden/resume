@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'preact/hooks'
 import { Reveal, reducedMotion } from './ui.jsx'
 import { profile } from '../data/resume.js'
-import photo from '../assets/photo.jpg'
+import photo from '../assets/portrait.jpg'
 import './hero.css'
 
 /* Ротация ролей: каждые 4 секунды — следующая, с лёгким fade */

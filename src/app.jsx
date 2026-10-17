@@ -1,4 +1,5 @@
 import { ToastProvider } from './components/ui.jsx'
+import Preloader from './components/preloader.jsx'
 import Nav from './components/nav.jsx'
 import Hero from './components/hero.jsx'
 import Stats from './components/stats.jsx'
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <ToastProvider>
       <div class="screen-only">
+        <Preloader />
         <a class="skip-link" href="#about">
           К содержанию
         </a>

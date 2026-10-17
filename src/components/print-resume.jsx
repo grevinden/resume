@@ -1,4 +1,4 @@
-import photo from '../assets/photo.jpg'
+import photo from '../assets/portrait.jpg'
 import {
   profile,
   about,
