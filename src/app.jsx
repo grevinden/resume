@@ -10,28 +10,34 @@ import Education from './components/education.jsx'
 import Military from './components/military.jsx'
 import Contacts from './components/contacts.jsx'
 import Footer from './components/footer.jsx'
+import PrintResume from './components/print-resume.jsx'
 
-/* ---------- Каркас страницы ---------- */
+/* ---------- Каркас страницы ----------
+   .screen-only — сайт для экрана; при печати скрывается
+   и печатается документное резюме (print-resume.jsx). */
 
 export default function App() {
   return (
     <ToastProvider>
-      <a class="skip-link" href="#about">
-        К содержанию
-      </a>
-      <Nav />
-      <main>
-        <Hero />
-        <Stats />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Military />
-        <Education />
-        <Contacts />
-      </main>
-      <Footer />
+      <div class="screen-only">
+        <a class="skip-link" href="#about">
+          К содержанию
+        </a>
+        <Nav />
+        <main>
+          <Hero />
+          <Stats />
+          <About />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Military />
+          <Education />
+          <Contacts />
+        </main>
+        <Footer />
+      </div>
+      <PrintResume />
     </ToastProvider>
   )
 }

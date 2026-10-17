@@ -3,13 +3,16 @@ import { profile } from '../data/resume.js'
 import './nav.css'
 
 const links = [
-  { id: 'about', label: 'Обо мне' },
+  { id: 'about', label: 'Обо\u00a0мне' },
   { id: 'skills', label: 'Навыки' },
   { id: 'projects', label: 'Проекты' },
   { id: 'experience', label: 'Опыт' },
   { id: 'education', label: 'Образование' },
   { id: 'contacts', label: 'Контакты' },
 ]
+
+const [firstName, ...lastParts] = profile.name.split(' ')
+const lastName = lastParts.join(' ')
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -53,8 +56,16 @@ export default function Nav() {
           <span class="logo-mark" aria-hidden="true">
             АР
           </span>
-          <span class="brand-name">{profile.name}</span>
-          <span class="brand-sub">backend · 1С · linux</span>
+          <span class="brand-text">
+            <span class="brand-name-stack">
+              <span class="brand-name">{firstName}</span>
+              <span class="brand-name">{lastName}</span>
+            </span>
+            <span class="brand-tags">
+              <span class="brand-tag">1С · linux</span>
+              <span class="brand-tag">backend</span>
+            </span>
+          </span>
         </a>
         <nav class="nav-links" aria-label="Основная навигация">
           {links.map((l) => (
@@ -63,6 +74,29 @@ export default function Nav() {
             </a>
           ))}
         </nav>
+        <button
+          class="btn btn-print nav-cta"
+          type="button"
+          title="Распечатать: красивое PDF-резюме"
+          onClick={() => window.print()}
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+          </svg>
+          <span class="btn-print-label">Распечатать</span>
+        </button>
         <a class="btn btn-primary nav-cta" href="#contacts">
           Связаться
         </a>

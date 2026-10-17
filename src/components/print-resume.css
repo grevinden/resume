@@ -1,0 +1,205 @@
+/* ============================================================
+   PRINT RESUME — документный шаблон для печати
+   На экране невидим: display:none.
+   При печати: сайт (.screen-only) скрывается, печатается он.
+   ============================================================ */
+
+.print-resume {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 14mm 14mm 14mm;
+  }
+
+  /* !important: в сборке сайтовый base.css идёт ПОСЛЕ этого файла,
+     и без !important его html{color-scheme:dark} и body{background:var(--bg)}
+     перебивали бы печатный документ, а printBackground: true — печатал бы их. */
+  html,
+  body {
+    color-scheme: light !important;
+    background: #fff !important;
+    background-image: none !important;
+  }
+
+  .print-resume {
+    display: block;
+    color: #111;
+    font-family: var(--font-body);
+    font-size: 10.2pt;
+    line-height: 1.85;
+    text-rendering: optimizeLegibility;
+  }
+
+  .print-resume * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* ---------- Документный заголовок: название + дата ---------- */
+
+  .pr-doc {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16pt;
+  }
+
+  .pr-doc-title {
+    font-family: var(--font-mono);
+    font-size: 10.5pt;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .pr-doc-date {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: #444;
+  }
+
+  /* ---------- Шапка: имя + фото ---------- */
+
+  .pr-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: start;
+    padding-bottom: 18pt;
+    margin-bottom: 22pt;
+  }
+
+  .pr-name {
+    margin: 0;
+    font-size: 19pt;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .pr-roles {
+    margin: 5pt 0 0;
+    font-size: 9pt;
+    color: #333;
+    line-height: 1.7;
+  }
+
+  .pr-contacts {
+    margin: 7pt 0 0;
+    font-family: var(--font-mono);
+    font-size: 7.8pt;
+    color: #222;
+    line-height: 2;
+    overflow-wrap: anywhere;
+  }
+
+  .pr-photo {
+    width: 27mm;
+    height: auto;
+    display: block;
+    border: 1pt solid #999;
+  }
+
+  /* ---------- Секции ---------- */
+
+  .pr-section {
+    margin-bottom: 20pt;
+  }
+
+  .pr-h {
+    margin: 0 0 9pt;
+    padding-bottom: 4pt;
+    border-bottom: 0.75pt solid #999;
+    font-family: var(--font-mono);
+    font-size: 8.2pt;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+ .pr-p {
+    margin: 0 0 16pt;
+    color: #1a1a1a;
+  }
+
+  .pr-p:last-child {
+    margin-bottom: 0;
+  }
+
+  .pr-mono {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 8.6pt;
+  }
+
+  /* ---------- Навыки ---------- */
+
+  .pr-skills {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 9.2pt;
+    line-height: 1.9;
+  }
+
+  .pr-skills b {
+    font-weight: 600;
+  }
+
+  /* ---------- Опыт и проекты ---------- */
+
+  .pr-exp,
+  .pr-proj {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pr-exp-item,
+  .pr-proj-item {
+    margin-bottom: 18pt;
+    break-inside: avoid;
+  }
+
+  .pr-exp-item:last-child,
+  .pr-proj-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .pr-exp-head {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 14pt;
+    font-size: 10.2pt;
+  }
+
+  .pr-exp-title {
+    font-weight: 600;
+  }
+
+  .pr-exp-period {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: #444;
+    white-space: nowrap;
+  }
+
+  .pr-proj-org {
+    margin-left: 8pt;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    font-weight: 400;
+    color: #444;
+    white-space: nowrap;
+  }
+
+  .pr-exp-item .pr-p,
+  .pr-proj-item .pr-p {
+    margin-top: 8pt;
+  }
+}

@@ -57,20 +57,41 @@
   box-shadow: 0 0 0 1px rgba(255, 180, 84, 0.25), 0 6px 18px rgba(255, 180, 84, 0.2);
 }
 
+.brand-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-name-stack {
+  display: grid;
+}
+
 .brand-name {
   font-family: var(--font-display);
-  font-size: 14.5px;
+  font-size: 11px;
   font-weight: 500;
+  line-height: 1.25;
   white-space: nowrap;
 }
 
-.brand-sub {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.12em;
-  color: var(--text-faint);
+/* «ячейка» справа от имени: 1С · linux / backend */
+.brand-tags {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-left: 1px solid var(--line);
   padding-left: 10px;
+  min-width: 58px;
+}
+
+.brand-tag {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  color: var(--text-faint);
+  white-space: nowrap;
 }
 
 .nav-links {
@@ -114,12 +135,47 @@
   white-space: nowrap;
 }
 
+/* «Распечатать» — равнозначный «Связаться»: свой цвет (accent-2),
+   чтобы оба действия читались первый раз без объяснений */
+.btn-print {
+  background: var(--accent-2);
+  color: #0d1830;
+  box-shadow: 0 8px 28px rgba(143, 182, 255, 0.18);
+}
+
+.btn-print:hover {
+  background: #a9c6ff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(143, 182, 255, 0.3);
+}
+
 @media (max-width: 860px) {
   .nav-links {
     display: none;
   }
 
-  .brand-sub {
+  .brand-tags {
     display: none;
+  }
+
+  .nav-cta {
+    padding: 0 14px;
+  }
+}
+
+/* Узкие экраны: имя и метки скрываются, «Распечатать» сжимается до иконки,
+   чтобы обе кнопки поместились рядом с логотипом */
+@media (max-width: 560px) {
+  .brand-text,
+  .brand-tags {
+    display: none;
+  }
+
+  .btn-print-label {
+    display: none;
+  }
+
+  .btn-print {
+    padding: 0 12px;
   }
 }
