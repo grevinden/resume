@@ -1,4 +1,4 @@
-# AGENTS.md — handoff для агентов
+# HANDOFF.md — handoff для агентов
 
 Статический сайт-резюме **Антона Растяженко**: Preact 11 + Vite 8, без бэкенда,
 тёмная «терминальная» эстетика + отдельная светлая печатная вёрстка (A4).
@@ -40,8 +40,9 @@ git add -A && git commit -m '<scope>: <описание по-русски>' && g
 ```
 
 После правок в `src/` **обязателен `npm run build`/`publish`** — пользователь смотрит
-готовое `dist`, а не dev-сервер. Для просмотра поднять статик-сервер на `dist/`
-(инструмент `preview_server` Coddy: он читает файлы с диска, правки видны после пересборки).
+готовое `dist` и корень репозитория, а не dev-сервер. Для просмотра поднять статик-сервер
+на корне или `dist/` (`python3 -m http.server 4173 --bind 127.0.0.1`), после пересборки
+обновить страницу.
 
 **Публикация = push в main.** Живой сайт проверяется через ~1–3 мин:
 сравнить hesh бандлов в живом `index.html` с `dist/index.html` (`assets/index-*.*.js`)
@@ -77,9 +78,18 @@ git add -A && git commit -m '<scope>: <описание по-русски>' && g
 3. **Бренд в nav** (`nav.css`): имя — две строки (`.brand-name-stack`: Антон / Растяженко,
    11px), справа — «ячейка» `.brand-tags` (border-left 1px `--line`, padding-left 10px,
    min-width 58px): строка 1 `1С · linux`, строка 2 `backend` (8.5px, mono, faint).
-   Брейкпоинты: ≤860px `.brand-tags` скрыто; ≤560px скрыты `.brand-text`+`.brand-tags`,
-   «Распечатать» — только иконка (62px). Кнопки равного веса разной окраски:
-   `.btn-print` — синий, `.nav-cta` — янтарный (в печати `.btn-print` → янтарный outline).
+   **Лестница приоритетов.** Блоки строки не сжимаются (подписи nowrap, `min-width: auto`),
+   поэтому при нехватке места флекс выносит их за правый край, а `.nav` фиксированный —
+   скролла нет, и элементы молча исчезают. Отсюда явные ступени по замеренной строке:
+   ≤1180px — меню (полной строке нужно 1157px); ≤620px — теги (без меню 593px);
+   ≤540px — имя (514px); ≤445px — кубик «АР», он последняя жертва бренда;
+   подписи обеих кнопок не скрываются нигде — на узких экранах подтягиваются только
+   отступы (≤860/430/375/355/330px). `flex: none` на `.nav-brand` и `.nav .nav-cta`,
+   чтобы кнопки и бренд нельзя было вытеснить. Проверено прогоном 300–1600px по 1px:
+   ни одной обрезки. Кнопки равного веса разной окраски: `.btn-print` — синий,
+   `.nav-cta` — янтарный (в печати `.btn-print` → янтарный outline).
+   Внимание: base.css собирается после компонентов, поэтому одиночный `.nav-cta`
+   перебивается `.btn`; правки кнопок шапки — только через `.nav .nav-cta`.
 4. **`Обо\u00a0мне`** в `links[]` (`nav.jsx`) — nbsp не случайно: пробел даёт перенос
    метки в узкой шапке.
 5. `hero.jsx`: терминальный блок `~/profile.yaml` — **декоративный**: «yaml» из данных
@@ -90,26 +100,33 @@ git add -A && git commit -m '<scope>: <описание по-русски>' && g
 
 ## Проверки (вёрстка/печать)
 
-Headless Chromium от Playwright (пакет в `node_modules`):
+Playwright в зависимостях нет. Рабочий headless-браузер этой машины — `/usr/bin/google-chrome`
+(у `chromium-browser` порт отладки не поднимается):
 
-```
-/Users/anton/Library/Caches/ms-playwright/chromium-1248/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+```sh
+/usr/bin/google-chrome --headless=new --remote-debugging-port=9359 --no-sandbox \
+  --disable-gpu --user-data-dir=/tmp/opencode/cdp about:blank   # далее CDP по ws://127.0.0.1:9359
 ```
 
-- **PDF печатной вёстки**: `page.emulateMedia({ media:'print' })` →
-  `page.pdf({ printBackground: true })` — проверить: ровно 3 страницы,
-  отсутствие тёмного фона (по draw-командам с цветом в stream'ах PDF).
-- **Симуляция пагинации**: исполнить print-правил (font-size/line-height/margins из
-  `print-resume.css`) + `getBoundingClientRect` каждого `h2`/`p`/`li`/`img` на чистом
-  `#page` с margin 12/14mm → жадная паковка, `break-inside:avoid`, высота страницы
-  273mm (A4 297 − 12 − 14).
-- **Координаты вместо скриншотов**: модель этой сессии не читает PNG
-  (`read` на картинке — ошибка «does not read images»); верстку проверять
-  `getBoundingClientRect`/computed style.
+Через CDP: `Emulation.setDeviceMetricsOverride` — ширины, `Runtime.evaluate` —
+`getBoundingClientRect`/computed style, `Page.captureScreenshot` (clip) — снимок элемента,
+`Emulation.setEmulatedMedia({media:'print'})` + `Page.printToPDF({printBackground:true,
+preferCSSPageSize:true})` — печатный PDF.
+
+- **PDF печатной вёрстки**: ровно 3 страницы (считать `/Type /Page` в потоке PDF),
+  отсутствие тёмного фона.
+- **Ширины шапки**: прогон 300–1600px по 1px; критерий — ни один видимый блок не
+  выходит за правый край окна и не обрезан внутри себя (`scrollWidth > clientWidth`),
+  подписи обеих кнопок видны на всех ширинах, скрытия совпадают с порогами лестницы.
+- **Координаты вместо скриншотов**: модель сессии не читает PNG; вёрстку проверять
+  `getBoundingClientRect`/computed style, скриншоты — только для человека.
 
 ## Состояние на момент handoff (2026-10-17)
 
-Коммит `452bb47` выложен в main; живое `https://grevinden.github.io/resume/`
-синхронизировано с `dist/` (`assets/index-DjE5hbmL.js` + `index-DZ-JEeIT.css`),
-`resume-print.pdf` (787 KB, 3 стр.) публичен на `/resume-print.pdf`.
-Открытых задач нет; правки — по циклу выше.
+Шапка перестроена: новая лестница приоритетов (пункт 3) — кубик «АР» жертвуется последним,
+подписи «Распечатать»/«Связаться» не скрываются никогда; удалён мёртвый код (`e.current`
+в `experience.jsx` + стили `.xp-dot-live`/`.xp-now` в `experience.css`); почта в
+`contacts.jsx` берётся из `data/resume.js`; из `vite.config.js` убран неиспользуемый
+`BASE_PATH`. Сборка: `assets/index-DcQjci1E.css` + `index-yWr-wkcB.js` (опубликованы в корень).
+Проверено: 300–1600px по 1px без обрезок, печатный PDF — ровно 3 страницы.
+**Push в main не сделан** — ждёт решения владельца.
