@@ -189,7 +189,9 @@
 .hero-side {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  /* фото и терминал стык встык: токена --space-5 не существовало,
+     зазор всегда вычислялся в normal (0) — вид не меняем */
+  gap: 0;
   align-self: center;
 }
 

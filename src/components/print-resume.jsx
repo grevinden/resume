@@ -47,7 +47,7 @@ export default function PrintResume() {
           <p class="pr-roles">{profile.roles.join('  ·  ')}</p>
           <p class="pr-contacts">{printContacts().join('  ·  ')}</p>
         </div>
-        <img class="pr-photo" src={photo} alt="Фото: {profile.name}" />
+        <img class="pr-photo" src={photo} alt={`Фото: ${profile.name}`} />
       </header>
 
       <section class="pr-section">

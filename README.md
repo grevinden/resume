@@ -16,7 +16,7 @@
 │  ├─ main.jsx           # монтаж: шрифты, стили, render
 │  ├─ app.jsx            # каркас: Hero → Stats → About → Skills → Projects → Experience → Military → Education → Contacts
 │  ├─ public/            # статика (favicon)
-│  ├─ assets/photo.jpg   # портрет
+│  ├─ assets/portrait.jpg   # портрет
 │  ├─ data/resume.js     # единый источник контента: все тексты сайта
 │  ├─ styles/            # tokens.css (палитра), base.css
 │  └─ components/        # nav, hero, stats, about, skills, projects, experience,
@@ -51,7 +51,7 @@ npm run publish    # сборка + копирование готовых фай
 ## Правки сайта
 
 - **Тексты** — `src/data/resume.js` (профиль, навыки, проекты, опыт, военная служба, образование, контакты).
-- **Портрет** — `src/assets/photo.jpg`; кадр 5:6, обрезка «на 15% вверх» задаётся в `hero.css` (`object-position: 50% 85%`).
+- **Портрет** — `src/assets/portrait.jpg`; кадр 5:6, обрезка «на 15% вверх» задаётся в `hero.css` (`object-position: 50% 85%`).
 - После правок: `npm run publish`, закоммитить `index.html`, `assets/`, `404.html`, `favicon.svg` и push.
 
 ## Печать
