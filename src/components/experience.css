@@ -2,7 +2,6 @@
 
 .xp {
   position: relative;
-  max-width: 840px;
   display: grid;
   gap: 18px;
   padding-left: 34px;
@@ -57,7 +56,9 @@
   border-color: var(--accent);
 }
 
-.xp-text {
+/* дата слева: моно, мелкая, приглушённая; padding-top подгоняет базовую
+   линию под 17px заголовок организации (в ≤680px дата уходит над заголовком) */
+.xp-period {
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: 0.04em;
@@ -86,6 +87,8 @@
   margin: 10px 0 0;
   font-size: 14.5px;
   color: var(--text-dim);
+  /* карточка во всю ширину контейнера, но длина строки — как у .lead (680px) */
+  max-width: 680px;
 }
 
 @media (max-width: 680px) {

@@ -1,9 +1,5 @@
 /* --- Образование: одна карточка на учёбу, стиль секций --- */
 
-.edu {
-  max-width: 760px;
-}
-
 .edu-item {
   display: grid;
   grid-template-columns: 180px 1fr;
@@ -37,6 +33,8 @@
   margin: 0 0 12px;
   color: var(--text-dim);
   line-height: 1.55;
+  /* карточка во всю ширину контейнера, но длина строки — как у .lead (680px) */
+  max-width: 680px;
 }
 
 .edu-note {
