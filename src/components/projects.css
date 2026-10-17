@@ -3,8 +3,7 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* в 2–3 колонках все карточки — одной высоты (по самой высокой строке) */
-  grid-auto-rows: 1fr;
+  /* строки берут высоту по содержимому; внутри строки карточки — по самой высокой */
   gap: 16px;
 }
 
@@ -120,7 +119,5 @@
 @media (max-width: 640px) {
   .projects-grid {
     grid-template-columns: 1fr;
-    /* в одну колонку — естественные высоты, без растяжки */
-    grid-auto-rows: auto;
   }
 }

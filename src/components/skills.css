@@ -3,8 +3,7 @@
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* в 2 колонки все карточки — одной высоты */
-  grid-auto-rows: 1fr;
+  /* строки берут высоту по содержимому; внутри строки карточки — по самой высокой */
   gap: 16px;
 }
 
@@ -49,7 +48,5 @@
 @media (max-width: 760px) {
   .skills-grid {
     grid-template-columns: 1fr;
-    /* в одну колонку — естественные высоты */
-    grid-auto-rows: auto;
   }
 }
