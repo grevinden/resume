@@ -14,17 +14,17 @@ GitHub: `grevinden/resume`, GitHub Pages: **ветка `main`, папка `/`** 
 src/
 ├─ index.html            # entry Vite (root = src/), мета og/ru
 ├─ main.jsx              # монтаж: @fontsource-шрифты → tokens.css → base.css → render(<App/>)
-├─ app.jsx               # каркас: .screen-only (сайт) + <PrintResume/>
+├─ app.jsx               # каркас: <Preloader/> + .screen-only (сайт) + <PrintResume/>
 ├─ data/resume.js        # ЕДИНЫЙ ИСТОЧНИК КОНТЕНТА: profile, about, skills,
 │                         # projects, experience, contacts, education, military
 ├─ public/               # статика (favicon)
-├─ assets/photo.jpg      # портрет 5:6, обрезка «на 15% вверх» — hero.css (object-position: 50% 85%)
+├─ assets/portrait.jpg   # портрет (1210×1762); кадр 5:6 и сдвиг — hero.css (object-position: 50% 2%)
 ├─ styles/
 │  ├─ tokens.css         # ВСЯ палитра/типографика/геометрия (изменения дизайна — сюда)
 │  └─ base.css          # reset, кнопки, @media print: .screen-only{display:none}
 └─ components/           # nav, hero, stats, about, skills, projects, experience,
                          # military, education, contacts, footer — по .jsx + .css на рот;
-                         # ui.jsx — общие (ToastProvider);
+                         # ui.jsx — общие (ToastProvider); preloader.jsx/.css — заставка загрузки;
                          # print-resume.jsx/.css — печатный документ
 scripts/publish.mjs      # npm run publish: dist/ → корень (index, 404, assets, favicon)
 ```
@@ -97,6 +97,18 @@ git add -A && git commit -m '<scope>: <описание по-русски>' && g
 6. Факты (возраст, должности, компании, даты, контакты) живут **только** в
    `data/resume.js`; печатный шаблон берёт те же объекты — контент правится
    единожды и обновляется в обоих вёрстных.
+7. **Прелоадер** (`preloader.jsx/.css`): непрозрачный слой (`z-index: 120`) поверх сайта —
+   пока не готовы портрет (`img.decode()`) и шрифты (`document.fonts.ready`), сайта не видно.
+   Минимум показа 450 мс (чтобы не мигало на быстрой сети), страховка 5 с: если фото
+   не загрузилось, сайт всё равно открывается. На время загрузки `html.is-booting`
+   (`overflow: hidden`), затем класс `is-done` (opacity 0 + visibility hidden).
+   В печати `display: none`. Портрет тянется и здесь (`new Image()`), и в hero —
+   это один и тот же файл, запрос один.
+8. **Портрет** (`src/assets/portrait.jpg`, 1210×1762): кадр hero 5:6 с `object-fit: cover`
+   показывает 82,4% высоты фото, сдвиг — `object-position: 50% 2%` (у нового портрета верх
+   головы на ~3,5% высоты, а анимация `breathe` с зумом 1,06 срезает сверху ещё ~2,3% —
+   при 2% запас остаётся). В печати `.pr-photo` — 27 мм ширины и своя высота (фото целиком,
+   без обрезки), поэтому PDF при смене портрета пересобирать тем же рецептом.
 
 ## Проверки (вёрстка/печать)
 
@@ -123,15 +135,22 @@ preferCSSPageSize:true})` — печатный PDF.
 
 ## Состояние на момент handoff (2026-10-17)
 
-Задеплоено в main (коммит `8dce41d`) и проверено на живом сайте
-(`https://grevinden.github.io/resume/`): шапка — новая лестница приоритетов (пункт 3),
-кубик «АР» жертвуется последним, подписи «Распечатать»/«Связаться» не скрываются никогда;
-мёртвый код удалён (`e.current` в `experience.jsx` + `.xp-dot-live`/`.xp-now` в
-`experience.css`); почта в `contacts.jsx` берётся из `data/resume.js`; неиспользуемый
-`BASE_PATH` из `vite.config.js` убран.
-Живые бандлы = локальные: `assets/index-DcQjci1E.css` + `index-yWr-wkcB.js` (CSS, JS,
-портрет, `/resume-print.pdf` — 200; PDF не пересобирался, печатная вёрстка не менялась).
-Проверки: прогон 300–1600px по 1px на собранной странице — ни одной обрезки; на живом
-сайте контрольные ширины 300/375/445/540/620/880/1186/1440px — состояния совпадают с
-порогами лестницы; горизонтального переполнения нет, все секции и шрифты загружены,
-ошибок консоли и сетевых сбоев нет. Открытых задач нет.
+Задеплоено в main и проверено на живом сайте (`https://grevinden.github.io/resume/`):
+
+- `0f8a9bf` — новый портрет (`src/assets/portrait.jpg`) вместо старого `photo.jpg`
+  в hero и печати + прелоадер загрузки; пересобран `resume-print.pdf` (3 стр., 689 КБ)
+  и корень репозитория.
+- `8dce41d` — шапка: лестница приоритетов (пункт 3), кубик «АР» жертвуется последним,
+  подписи обеих кнопок не скрываются никогда; удалён мёртвый код (`e.current` в
+  `experience.jsx` + `.xp-dot-live`/`.xp-now` в `experience.css`); почта в `contacts.jsx`
+  берётся из `data/resume.js`; неиспользуемый `BASE_PATH` убран.
+
+Живые бандлы = локальные: `assets/index-CT86Q8g4.css` + `index-Bnhssle1.js` +
+`portrait-CcsBQgKn.jpg` (портрет и прелоадер); `/resume-print.pdf` — 200.
+
+Проверено: прогон ширин 300–1600px по 1px на собранной странице — ни одной обрезки;
+контрольные ширины 300/375/445/540/620/880/1186/1440px — состояния совпадают с порогами
+лестницы; прелоадер при выключенном кеше и 3G-троттлинге — на t≈0,7 с сайт закрыт
+(`html.is-booting`, `overflow: hidden`, портрет ещё не готов), на t≈5 с — `is-done`,
+портрет `complete`, `naturalWidth` 1210; в печати прелоадер `display: none`, PDF ровно
+3 страницы без тёмного фона. Открытых задач нет.
