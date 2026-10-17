@@ -70,8 +70,9 @@ function ExtArrow() {
 
 export default function Contacts() {
   const toast = useToast()
+  const email = contacts.items.find((it) => it.id === 'email')?.value ?? ''
   const copyEmail = () =>
-    copyText('anton@79252587842.ru', (ok) => toast(ok ? 'Почта скопирована ✓' : 'Не удалось скопировать'))
+    copyText(email, (ok) => toast(ok ? 'Почта скопирована ✓' : 'Не удалось скопировать'))
 
   return (
     <section class="section" id="contacts">
@@ -126,7 +127,7 @@ export default function Contacts() {
               </ul>
               <a
                 class="btn btn-primary"
-                href={`mailto:anton@79252587842.ru?subject=${encodeURIComponent('Предложение')}`}
+                href={`mailto:${email}?subject=${encodeURIComponent('Предложение')}`}
               >
                 Написать письмо
               </a>

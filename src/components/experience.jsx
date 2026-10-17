@@ -14,17 +14,14 @@ export default function Experience() {
         <div class="xp">
           {experience.map((e) => (
             <Reveal key={e.period + e.org} delay={60}>
-              <article class={`xp-item ${e.current ? 'is-current' : ''}`}>
+              <article class="xp-item">
                 <span class="xp-anchor" aria-hidden="true">
-                  {e.current ? <span class="xp-dot-live" /> : <span class="xp-dot" />}
+                  <span class="xp-dot" />
                 </span>
                 <time class="xp-period">{e.period}</time>
                 <div class="xp-body">
                   {e.org ? <h3 class="xp-org">{e.org}</h3> : null}
-                  <p class="xp-role">
-                    {e.role}
-                    {e.current ? <span class="xp-now"> · сейчас</span> : null}
-                  </p>
+                  <p class="xp-role">{e.role}</p>
                   <p class="xp-text">{e.text}</p>
                 </div>
               </article>

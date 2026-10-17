@@ -12,7 +12,7 @@ const here = dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   root: resolve(here, 'src'),
   publicDir: resolve(here, 'src/public'),
-  base: process.env.BASE_PATH || './',
+  base: './',
   build: {
     outDir: resolve(here, 'dist'),
     emptyOutDir: true,

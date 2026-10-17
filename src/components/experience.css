@@ -57,26 +57,7 @@
   border-color: var(--accent);
 }
 
-.xp-dot-live {
-  position: relative;
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 18px rgba(255, 180, 84, 0.5);
-}
-
-.xp-dot-live::after {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  animation: pulse 2.4s var(--ease) infinite;
-}
-
-.xp-period {
+.xp-text {
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: 0.04em;
@@ -99,12 +80,6 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--accent);
-}
-
-.xp-now {
-  color: var(--ok);
-  font-family: var(--font-mono);
-  font-size: 12px;
 }
 
 .xp-text {
