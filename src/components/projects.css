@@ -3,6 +3,8 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  /* в 2–3 колонках все карточки — одной высоты (по самой высокой строке) */
+  grid-auto-rows: 1fr;
   gap: 16px;
 }
 
@@ -10,6 +12,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding: 24px;
   overflow: hidden;
   transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
@@ -94,7 +97,10 @@
 }
 
 .proj-tags {
-  margin-top: auto;
+  /* нижний сегмент: тонкая линия во всю ширину карточки, чипы у нижнего края */
+  margin: auto -24px 0;
+  padding: 14px 24px 0;
+  border-top: 1px solid var(--line);
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -114,5 +120,7 @@
 @media (max-width: 640px) {
   .projects-grid {
     grid-template-columns: 1fr;
+    /* в одну колонку — естественные высоты, без растяжки */
+    grid-auto-rows: auto;
   }
 }
