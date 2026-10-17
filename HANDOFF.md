@@ -149,8 +149,8 @@ preferCSSPageSize:true})` — печатный PDF.
   `experience.jsx` + `.xp-dot-live`/`.xp-now` в `experience.css`); почта в `contacts.jsx`
   берётся из `data/resume.js`; неиспользуемый `BASE_PATH` убран.
 
-Живые бандлы = локальные: `assets/index-CT86Q8g4.css` + `index-Bnhssle1.js` +
-`portrait-CcsBQgKn.jpg` (портрет и прелоадер); `/resume-print.pdf` — 200.
+Живые бандлы = локальные: `assets/index-6zvE8Fyg.css` + `index-DX8XkJeD.js` +
+`portrait-CcsBQgKn.jpg` (портрет и прелоадер); `/resume-print.pdf` — 200 (689025 Б).
 
 Проверено: прогон ширин 300–1600px по 1px на собранной странице — ни одной обрезки;
 контрольные ширины 300/375/445/540/620/880/1186/1440px — состояния совпадают с порогами
